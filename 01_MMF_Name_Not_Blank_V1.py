@@ -13,6 +13,10 @@ def not_blank(question):
             
 
 # Main routine goes here
-name = not_blank("name: ")
-print()
-print("Your name is:",name)
+
+while 1 == 1:
+    name = not_blank("name: ")
+    print()
+    print("Your name is:",name)
+    print()
+    print()
