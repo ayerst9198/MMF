@@ -8,6 +8,8 @@ def not_blank(question, error_msg):
 
         if response == "":
             print(error_msg)
+        
+        # credit: Ryan Ogilvy; for the whitespace checker
         elif str.isspace(response):
             print(error_msg)
         else:
