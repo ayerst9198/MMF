@@ -3,6 +3,22 @@
 
 # functions go here
 
+# makes it that fields cannot be empty, or filled with spaces
+def not_blank(question, error_msg):
+    valid = False
+
+    while not valid:
+        response = input(question)
+
+        if response == "":
+            print(error_msg)
+        
+        # credit: Ryan Ogilvy; for the whitespace checker
+        elif str.isspace(response):
+            print(error_msg)
+        else:
+            return response
+
 
 # *********** Main Routine ***********
 
@@ -13,6 +29,7 @@
 # Loop to get ticket details
 
     # Get name (can't be blank)
+    name = not_blank("name: ", "no blanks, sorry")
 
     # Get age (between 12 and 130)
 
