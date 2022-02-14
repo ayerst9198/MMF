@@ -30,7 +30,7 @@ while name != "xxx" and count <= MAX_TICKETS - 1:
     
 
     if MAX_TICKETS - count == 1:
-        print ("ONLY 1 TICKET LEFT")
+        print ("ONLY 1 SEAT LEFT")
     else:
         print("You have {} seats left".format(MAX_TICKETS - count))
 
