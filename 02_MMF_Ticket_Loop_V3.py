@@ -1,9 +1,6 @@
 # functions go here
 
 # makes it that fields cannot be empty, or filled with spaces
-from typing import MappingView
-
-
 def not_blank(question, error_msg):
     valid = False
 
@@ -39,6 +36,9 @@ while name != "xxx" and count <= MAX_TICKETS - 1:
 
     # get details
     name = not_blank("What is your name? ", "Your name cannot be blank, please enter a new name.")
+    # implements exit code
+    if name == "xxx":
+        break
     count += 1
     print()
 
