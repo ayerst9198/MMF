@@ -1,6 +1,3 @@
-# import statements
-
-
 # functions go here
 
 # makes it that fields cannot be empty, or filled with spaces
@@ -67,78 +64,38 @@ def num_check(question, num_type, error, low=None, high=None, exit_code=None):
             print()
 
 
-# *********** Main Routine ***********
+# Main Routine
 
-# Set up Dictionaries / lists needed to hold data
+test = True
 
-# Ask user if they have used the program before & show instructions if they haven't
-
-# Loop to get ticket details
-
-# initialise loop so that it runs at least once
-name = ""
-count = 0
-MAX_TICKETS = 5
-
-while name != "xxx" and count <= MAX_TICKETS - 1:
-
-    
-
-    if MAX_TICKETS - count == 1:
-        print ("ONLY 1 TICKET LEFT")
-    else:
-        print("You have {} seats left".format(MAX_TICKETS - count))
-
-    # get details
-
-    # Get name (can't be blank)
-    name = not_blank("What is your name? ", "Your name cannot be blank, please enter a new name.")
-
+# loops for testing
+while test == True:
+    profit = 0    
     print()
 
-    # implements exit code
+    # asks user for their name, with no blanks
+    name = not_blank("name: ", "no blanks, sorry")
+
     if name == "xxx":
         break
-    
-
-    # checks the users age to make sure that they are between the ages of 12 and 130
-    age = num_check("What is your age?", int, "Only those between ages 12 and 130 are permitted to purchase seats. Please enter an integer between 12 and 130.")
 
     print()
 
-    # if the age given is below 12 or above 130, an error is printed which sends the user back to the input name.
+    age = num_check("How old are you? ", int, "Please enter an integer between 12 and 130", 12, 130, "xxx")
+    print()
+
+    # if the age given is below 12 or above 130, an error is printed which sends the user back to input name.
     if age < 12 or age > 130:
         print("Only those between ages 12 and 130 are permitted to purchase seats.")
         print()
         continue
-    elif age == "xxx":
-        break
+    elif age < 16:
+        ticket_price = 7.50
+    elif age > 64:
+        ticket_price = 6.50
+    else:
+        ticket_price = 10.50
 
 
-    # increases the number of seats purchased by 1
-    count += 1
-    print()
-
-
-        
-
-# checks if seats left = 1, if so prints a special message
-if count == MAX_TICKETS:
-    print("You have sold all available tickets!")
-else:
-    print("You have sold {} tickets. There are still {} tickets available".format(count, MAX_TICKETS - count))
-
-
-    # Get age (between 12 and 130)
-
-    # Calculate ticket price
-
-    # Loop to ask for snacks
-
-    # Calculate snack price
-
-    # Ask for payment method
-
-    # Calculate total sales and profit
-
-# Outpuyt data to text file
+    # prints the cost, displayed as a price
+    print("***** {} has purchased a ticket. The cost is: ${:.2f}".format(name, ticket_price) + " *****")
