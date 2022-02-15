@@ -1,3 +1,7 @@
+# functions go here
+
+# makes sure that the number entered is between the highest number alloiwed and the lowestnumber allowed, with an exit code
+# taken from year 10 programming assessment
 def num_check(question, num_type, error, low=None, high=None, exit_code=None):
 
     valid = False
@@ -45,6 +49,7 @@ def num_check(question, num_type, error, low=None, high=None, exit_code=None):
 
 age = "yes"
 
+# loops for testing
 while age != int:
     age = num_check("How old are you? ", int, "Please enter an integer between 12 and 130", 12, 130, "xxx")
     if age == "xxx":

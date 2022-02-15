@@ -19,6 +19,53 @@ def not_blank(question, error_msg):
         else:
             return response
 
+# makes sure that the number entered is between the highest number alloiwed and the lowestnumber allowed, with an exit code
+# taken from year 10 programming assessment
+def num_check(question, num_type, error, low=None, high=None, exit_code=None):
+
+    valid = False
+    while not valid:
+        try:
+            response = input(question).lower()
+
+
+            if response == exit_code:
+                return response
+
+            else:
+                response = num_type(response)
+ 
+            if low is not None and high is not None:
+                if low <= response <= high:
+                    return response
+                else:
+                    print(error)
+                    print()
+                    continue
+
+            elif low is not None:
+                if response >= low:
+                    return response
+                else:
+                    print(error)
+                    print()
+                    continue
+
+            elif high is not None:
+                if response <= high:
+                    return response
+                else:
+                    print(error)
+                    print()
+                    continue
+
+            else:
+                return response
+
+        except ValueError:
+            print(error)
+            print()
+
 
 # *********** Main Routine ***********
 
@@ -47,6 +94,14 @@ while name != "xxx" and count <= MAX_TICKETS - 1:
     # Get name (can't be blank)
     name = not_blank("What is your name? ", "Your name cannot be blank, please enter a new name.")
 
+    age = num_check("What is your age?", int, "Only those between ages 12 and 130 are permitted to purchase seats.", None, None, "xxx")
+
+    if age < 12 or age > 130:
+        print()
+        print("Only those between ages 12 and 130 are permitted to purchase seats.")
+        print()
+        continue
+
     # implements exit code
     if name == "xxx":
         break
@@ -54,6 +109,9 @@ while name != "xxx" and count <= MAX_TICKETS - 1:
     # increases the number of seats purchased by 1
     count += 1
     print()
+
+
+        
 
 # checks if seats left = 1, if so prints a special message
 if count == MAX_TICKETS:
