@@ -67,11 +67,9 @@ def num_check(question, num_type, error, low=None, high=None, exit_code=None):
 # Main Routine
 
 test = True
-
+profit = 0
 # loops for testing
 while test == True:
-    profit = 0
-    
     print()
 
     # asks user for their name, with no blanks
@@ -102,5 +100,8 @@ while test == True:
 
     # prints the cost, displayed as a price
     print("***** {} has purchased a ticket. The cost is: ${:.2f}".format(name, ticket_price) + " *****")
-    print()
-    print("You have made ${:.2f} profit".format(profit))
+
+#displays profit made
+print()
+print("$$$$$ You have made ${:.2f} profit $$$$$".format(profit))
+print()

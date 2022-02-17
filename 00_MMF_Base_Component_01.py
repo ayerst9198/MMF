@@ -77,17 +77,18 @@ def num_check(question, num_type, error, low=None, high=None, exit_code=None):
 
 # initialise loop so that it runs at least once
 name = ""
-count = 0
+ticket_count = 0
+profit = 0
 MAX_TICKETS = 5
 
-while name != "xxx" and count <= MAX_TICKETS - 1:
+while name != "xxx" and ticket_count <= MAX_TICKETS - 1:
 
     
 
-    if MAX_TICKETS - count == 1:
+    if MAX_TICKETS - ticket_count == 1:
         print ("ONLY 1 TICKET LEFT")
     else:
-        print("You have {} seats left".format(MAX_TICKETS - count))
+        print("You have {} seats left".format(MAX_TICKETS - ticket_count))
 
     # get details
 
@@ -102,7 +103,7 @@ while name != "xxx" and count <= MAX_TICKETS - 1:
     
 
     # checks the users age to make sure that they are between the ages of 12 and 130
-    age = num_check("What is your age?", int, "Only those between ages 12 and 130 are permitted to purchase seats. Please enter an integer between 12 and 130.")
+    age = num_check("What is your age? ", int, "Only those between ages 12 and 130 are permitted to purchase seats. Please enter an integer between 12 and 130.")
 
     print()
 
@@ -111,34 +112,33 @@ while name != "xxx" and count <= MAX_TICKETS - 1:
         print("Only those between ages 12 and 130 are permitted to purchase seats.")
         print()
         continue
-    elif age == "xxx":
-        break
 
+    # cost depending on age
+    elif age < 16:
+        ticket_price = 7.50
+    elif age > 64:
+        ticket_price = 6.50
+    else:
+        ticket_price = 10.50
+
+    # calculates the profit made from the tickets sold
+    profit_made = ticket_price - 5
+    profit += profit_made
 
     # increases the number of seats purchased by 1
-    count += 1
+    ticket_count += 1
     print()
 
 
         
 
 # checks if seats left = 1, if so prints a special message
-if count == MAX_TICKETS:
+if ticket_count == MAX_TICKETS:
     print("You have sold all available tickets!")
 else:
-    print("You have sold {} tickets. There are still {} tickets available".format(count, MAX_TICKETS - count))
+    print("You have sold {} tickets. There are still {} tickets available".format(ticket_count, MAX_TICKETS - ticket_count))
 
-
-    # Get age (between 12 and 130)
-
-    # Calculate ticket price
-
-    # Loop to ask for snacks
-
-    # Calculate snack price
-
-    # Ask for payment method
-
-    # Calculate total sales and profit
-
-# Outpuyt data to text file
+# says how much profit has been made
+print()
+print("$$$$$ You have made ${:.2f} profit $$$$$".format(profit))
+print()
