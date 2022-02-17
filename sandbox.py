@@ -1,15 +1,30 @@
-def nenter(question):
-    valid = False
+# functions go here
 
+# taken from RPS
+def yes_no(question):
+    valid = False
     while not valid:
-        response = input(question)
-        return response
- 
-dsafas = nenter("is star wars bad?")
-num = 1
+        response = input(question).lower()
+
+        if response == "yes" or response == "y":
+            response = "yes"
+            return response
+
+        elif response == "no" or response == "n":
+            response = "no"
+            return response
+
+        else:
+            print("Please input yes / no")
+
+# Main Routine Goes Here
+count = 0
 while 1 == 1:
-    
-    if dsafas == "no" or "No" or "NO" or "nO":
-        print("wrong it sux")
-    else:
-        print ("glad we agree")
+    want_snacks = yes_no("Do you want snacks? ")
+    print("Answer OK, you said:", want_snacks)
+    print()
+    if want_snacks == "yes":
+        count += 1
+    if count == 6:
+        print("You a greedy lil mf aren't ya")
+        break
