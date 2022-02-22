@@ -17,7 +17,8 @@ def string_checker(choice, options):
     # if snack is not ok - ask again
     if is_valid == "yes":
         return chosen
-    else: return "invalid choice"
+    else: 
+        return "invalid choice"
 
 # Main Routine 
 
@@ -38,48 +39,35 @@ yes_no = [
     ["no", "n"]
 ]
 
-# holds snack order for a single user
-snack_order = []
 
-# ask user if they want a snack
+# initialise variables
+snack_ok = ""
+snack = ""
+snack_list = []
+
+# ask user if they want snacks
 check_snack = "invalid choice"
 while check_snack == "invalid choice":
     want_snack = input("Do you want snacks? ").lower()
     check_snack = string_checker(want_snack, yes_no)
 
 
-# if they say yes, ask what snack they want
+# loop 3 times to make testing quicker
 if check_snack == "Yes":
+    # ask user for a desired snacks and put in lowercase
+    snack_ok = "no"
 
     desired_snack = ""
     while desired_snack != "xxx":
 
-        # ask user for desired snack and put it in lowercase
-        desired_snack = input("Snack: ").lower
+        desired_snack = input("Snack: ").lower()
 
         if desired_snack == "xxx":
             break
-        
-        # check snack choice isvalid
+
         snack_choice = string_checker(desired_snack, valid_snacks)
-        print("Snack Choice: ", snack_choice)
-    
-    # add snack to list
+        print("snack choice: ", snack_choice)
+        snack_list.append(snack_choice)
 
-    # check that snack is not exit code before adding
-    if snack_choice != "xxx" and snack_choice != "invalid choice":
-        snack_order.append(snack_choice)
-# initialise variables
-snack_ok = ""
-snack = ""
-snack_list = []
+print("Sold snacks: {}".format(snack_list))
 
-#show snakck orders
-print()
-if len(snack_order) == 0:
-    print("Snacks Ordered: None")
-else:
-    print("Snacks Ordered:")
-
-    for item in snack_order:
-        print(item)
