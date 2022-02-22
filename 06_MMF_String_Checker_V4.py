@@ -1,0 +1,63 @@
+# functions go here
+def string_checker(choice, options):
+    for var_list in options:
+
+        # if snack is in list return full snack name
+        if choice in var_list:
+
+            # get full name of snack and put it 
+            # in title case so it looks noice
+            chosen = var_list[0].title()
+            is_valid = "yes"
+            break
+        # if choe option is not valid, set is_valid to no
+        else:
+            is_valid = "no"
+    
+    # if snack is not ok - ask again
+    if is_valid == "yes":
+        return chosen
+    else: return "invalid choice"
+
+# Main Routine 
+
+# valid snacks holds list of all snacks
+# Each item in valid snacks is a list whith
+# valid options for each snack <full name, letter  code (a - e)
+# , and possible abbreviatio
+valid_snacks = [
+    ["popcorn", "p", "corn", "a"], 
+    ["M&M's", "m&m's", "mms", "m", "b"], 
+    ["pita chips", "chips", "pc", "pita", "c"], 
+    ["water", "w", "d"]
+]
+
+yes_no = [
+    ["yes", "y"],
+    ["no", "n"]
+]
+
+check_snack = "invalid choice"
+while check_snack == "invalid choice":
+    want_snack = input("Do you want snacks? ").lower()
+    check_snack = string_checker(want_snack, yes_no)
+    if want_snack == "maybe":
+        check_snack = "invalid choice"
+        print("<error please enter a valid option>")
+        print()
+        continue
+    
+# initialise variables
+snack_ok = ""
+snack = ""
+snack_list = []
+
+# loop 6 times to make testing quicker
+for item in range(0, 6):
+    # ask user for a desired snacks and put in lowercase
+    snack_ok = "no"
+    desired_snack = input("Snack: ").lower()
+
+    # check if snack is valid
+    snack_choice = string_checker(desired_snack, valid_snacks)
+    print("Snack Choice: ", snack_choice)

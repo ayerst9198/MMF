@@ -30,10 +30,12 @@ valid_snacks = [
 # initialise variables
 snack_ok = ""
 snack = ""
+snack_list = []
 
 # loop 3 times to make testing quicker
 for item in range(0, 3):
     # ask user for a desired snacks and put in lowercase
+    snack_ok = "no"
     desired_snack = input("Snack: ").lower()
 
     for var_list in valid_snacks:
@@ -42,17 +44,19 @@ for item in range(0, 3):
         if desired_snack in var_list:
 
             # Get full name of snack and put it in title
-            # snack = var_list[0].title()
+            snack = var_list[0].title()
+            snack_list.append(var_list[0].title())
             snack_ok = "yes"
-            break
+        #     break
 
-        # if the chosen snackis not valid, set snack_ok to "no"
-        else:
-            snack_ok = "no"
-            break
+        # # if the chosen snackis not valid, set snack_ok to "no"
+        # else:
+        #     snack_ok = "no"
+        #     break
     
     # if the snakc != ok - ask again
     if snack_ok == "yes":
         print("Snack Choice: ", snack)
     else:
         print("invalid_choice")
+print("Sold snacks: {}".format(snack_list))
