@@ -52,6 +52,7 @@ while check_snack == "invalid choice":
     check_snack = string_checker(want_snack, yes_no)
 
 
+
 # loop 3 times to make testing quicker
 if check_snack == "Yes":
     # ask user for a desired snacks and put in lowercase
@@ -66,8 +67,19 @@ if check_snack == "Yes":
             break
 
         snack_choice = string_checker(desired_snack, valid_snacks)
+        if snack_choice == "invalid choice":
+            print("Invalid Choice")
+            print()
+            continue
         print("snack choice: ", snack_choice)
         snack_list.append(snack_choice)
 
-print("Sold snacks: {}".format(snack_list))
+print()
+if len(snack_list) == 0:
+    print("Snacks Ordered: None")
+else:
+    print("Snacks Ordered:")
+
+    for item in snack_list:
+        print(item)
 
