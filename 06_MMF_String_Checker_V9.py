@@ -109,6 +109,7 @@ while check_snack == "invalid choice":
     if check_snack == "invalid choice":
         print("Please enter yes or no")
 
+
 # if they say yes ask what snacks they want
 if check_snack == "Yes":
     get_order = get_snack()
