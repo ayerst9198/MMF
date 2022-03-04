@@ -4,6 +4,7 @@ import pandas
 
 
 all_names = ["Rangi", "Manaia", "Talia", "Arihi", "Fetu"]
+all_tickets = [7.5, 10.5, 10.5, 10.5, 6.5]
 
 popcorn = []
 mms = []
@@ -17,11 +18,21 @@ snack_lists = [popcorn, mms, pita_chips, water, orange_juice]
 # data frame dictionary
 movie_data_dict = {
     "Name": all_names,
+    "Ticket": all_tickets,
     "Popcorn": popcorn,
     "Water": water,
     "Pita Chips": pita_chips,
-    "M&Ms": mms,
+    "M&M's": mms,
     "Orange Juice": orange_juice
+}
+
+# price dictionary
+price_dict = {
+    "Popcorn": 2.5,
+    "Water": 2,
+    "Pita Chips": 4.5,
+    "M&M's": 3,
+    "Orange Juice": 3.25
 }
 
 test_data = [
@@ -29,7 +40,7 @@ test_data = [
     [[]],
     [[1, "Water"]],
     [[1, "Popcorn"], [1, "Orange Juice"]],
-    [[1, "M&Ms"], [1, "Pita Chips"], [3, "Orange Juice"]]
+    [[1, "M&M's"], [1, "Pita Chips"], [3, "Orange Juice"]]
 ]
 
 count = 0
@@ -53,13 +64,23 @@ for client_order in test_data:
             add_list[-1] = amount
 
 print()
-print("Popcorn: ", snack_lists[0])
-print("M&Ms: ", snack_lists[1])
-print("Pita Chips: ", snack_lists[2])
-print("Water: ", snack_lists[3])
-print("Orange Juice: ", snack_lists[4])
-print()
 
-movie_frame = pandas.DataFrame(movie_data_dict)
+# create a dataframe and set the index to name column
+movie_frame = pandas.DataFrame(movie_data_dict, columns=['Name', "Ticket", 'Popcorn', 'Water', "Pita Chips", "M&M's", "Orange Juice"])
 movie_frame = movie_frame.set_index("Name")
+
+# create a column called "subtotal"
+# fill with price for snacks and ticket
+
+movie_frame["Subtotal"] = \
+    movie_frame["Ticket"] + \
+    movie_frame["Popcorn"]*price_dict["Popcorn"] + \
+    movie_frame["Water"]*price_dict["Water"] + \
+    movie_frame["Pita Chips"]*price_dict["Pita Chips"] + \
+    movie_frame["M&M's"]*price_dict["M&M's"] + \
+    movie_frame["Orange Juice"]*price_dict["Orange Juice"]
+
+# shorten column names
+movie_frame = movie_frame.rename(columns={"Orange Juice": "OJ", "Pita Chips": "Chips"})
+
 print(movie_frame)
