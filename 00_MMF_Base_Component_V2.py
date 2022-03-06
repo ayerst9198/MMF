@@ -20,6 +20,27 @@ def not_blank(question, error_msg):
         else:
             return response
 
+def string_checker(choice, options):
+    for var_list in options:
+
+        # if snack is in list return full snack name
+        if choice in var_list:
+
+            # get full name of snack and put it 
+            # in title case so it looks noice
+            chosen = var_list[0].title()
+            is_valid = "yes"
+            break
+        # if choe option is not valid, set is_valid to no
+        else:
+            is_valid = "no"
+    
+    # if snack is not ok - ask again
+    if is_valid == "yes":
+        return chosen
+    else: 
+        return "invalid choice"
+
 # makes sure that the number entered is between the highest number alloiwed and the lowestnumber allowed, with an exit code
 # taken from year 10 programming assessment
 def num_check(question, num_type, error, low=None, high=None, exit_code=None):
