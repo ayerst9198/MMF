@@ -212,6 +212,7 @@ orange_juice = []
 snack_lists = [popcorn, mms, pita_chips, water, orange_juice]
 
 # store surcharge multiplier
+surcharge_multi_list = []
 
 # data frame dictionary
 movie_data_dict = {
@@ -221,7 +222,8 @@ movie_data_dict = {
     "Water": water,
     "Pita Chips": pita_chips,
     "M&M's": mms,
-    "Orange Juice": orange_juice
+    "Orange Juice": orange_juice,
+    "Surcharge Multiplier": surcharge_multi_list
 }
 
 # price dictionary
