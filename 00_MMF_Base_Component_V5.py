@@ -133,11 +133,11 @@ def get_snack():
     # , and possible abbreviation
 
     valid_snacks = [
-        ["popcorn", "p", "corn", "a"], 
-        ["M&Ms", "m&m's", "mms", "m", "b"], 
+        ["popcorn", "p", "pop", "corn", "a"], 
+        ["M&Ms", "m&m's", "mms", "mm", "m", "b"], 
         ["pita chips", "chips", "pc", "pita", "c"], 
-        ["water", "w", "d"],
-        ["orange juice", "oj", "o", "juice", "e"]
+        ["water", "w", "h2O" "d"],
+        ["orange juice", "oj", "o", "juice", "orange" "e"]
     ]
 
 
@@ -284,17 +284,7 @@ while name != "xxx" and ticket_count <= MAX_TICKETS - 1:
     all_tickets.append(ticket_price)
 
     # get snacks
-    # ask user if they want a snack
-    check_snack = "invalid choice"
-    while check_snack == "invalid choice":
-        want_snack = input("Do you want to order snacks? ")
-        check_snack = string_checker(want_snack, yes_no)
-    
-    # If they say yes, ask what snacks they want
-    if check_snack == "Yes":
-        snack_order = get_snack()
-    else:
-        snack_order = []
+    snack_order = get_snack()
 
     # assume no snacks have been bought
     for item in snack_lists:
@@ -333,14 +323,16 @@ movie_frame = movie_frame.set_index("Name")
 # create a column called "subtotal"
 # fill with price for snacks and ticket
 
-movie_frame["Sub Total"] = \
-    movie_frame["Ticket"] + \
+movie_frame["Snacks"] = \
     movie_frame["Popcorn"]*price_dict["Popcorn"] + \
     movie_frame["Water"]*price_dict["Water"] + \
     movie_frame["Pita Chips"]*price_dict["Pita Chips"] + \
     movie_frame["M&Ms"]*price_dict["M&Ms"] + \
     movie_frame["Orange Juice"]*price_dict["Orange Juice"]
 
+movie_frame["Sub Total"] = \
+    movie_frame["Ticket"] + \
+    movie_frame["Snacks"]
 
 movie_frame["Surcharge"] = \
     movie_frame["Sub Total"] * movie_frame["Surcharge_Multiplier"]
@@ -370,9 +362,11 @@ summary_data.append(ticket_profit)
 
 # Work out total profit and add to list
 total_profit = snack_profit + ticket_profit
-summary_data.appen(total_profit)
+summary_data.append(total_profit)
 
-
+# Create summary frame
+summary_frame = pandas.DataFrame(summary_data_dict)
+summary_frame = summary_frame.set_index("Item")
 
 # Set up columns to be printed...
 pandas.set_option("display.max_columns", None)
@@ -380,14 +374,17 @@ pandas.set_option("display.max_columns", None)
 # Display number to 2 dp
 pandas.set_option("precision", 2)
 
-print_all = input("Print all columns?? (y) for yes")
-if print_all == "y":
-    print(movie_frame)
-else:
-    print(movie_frame[["Ticket", "Sub Total", "Surcharge", "Total"]])
-
+print()
+print("**** Ticket / Snack Info ****")
+print("Note: for full details, please see the excel file called...")
+print()
+print(movie_frame[["Ticket", "Sub Total", "Surcharge", "Total"]])
 print()
 
+print("**** Snack / Profit Summary")
+print()
+print(summary_frame)
+print()
 # Tell user if they have unsold tickets
 if ticket_count == MAX_TICKETS:
     print("You have sold all available tickets!")
