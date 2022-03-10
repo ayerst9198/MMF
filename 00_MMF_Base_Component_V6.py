@@ -1,4 +1,5 @@
 # import statements
+from audioop import add
 import re
 import pandas
 
@@ -184,6 +185,10 @@ def get_snack():
         if snack_choice != "xxx" and snack_choice != "invalid choice":
             snack_list.append(snack_row)
 
+# Currency formatting function
+def currency(x):
+    return "${:.2f}".format(x)
+
 # *********** Main Routine ***********
 
 # Set up Dictionaries / lists needed to hold data
@@ -354,15 +359,18 @@ for item in snack_lists:
 # get snack total from panda
 snack_total = movie_frame["Snacks"].sum()
 snack_profit = snack_total * 0.2
-summary_data.append(snack_profit)
 
-# Calculate ticket profit and add it to list
+# Calculate ticket profit
 ticket_profit = ticket_sales - (5 * ticket_count)
-summary_data.append(ticket_profit)
 
-# Work out total profit and add to list
+# Work out total profit
 total_profit = snack_profit + ticket_profit
-summary_data.append(total_profit)
+
+# format dollar amounts and add to lists...
+dollar_amounts = [snack_profit, ticket_profit, total_profit]
+for item in dollar_amounts:
+    item = "${:.2f}".format(item)
+    summary_data.append(item)
 
 # Create summary frame
 summary_frame = pandas.DataFrame(summary_data_dict)
@@ -371,8 +379,17 @@ summary_frame = summary_frame.set_index("Item")
 # Set up columns to be printed...
 pandas.set_option("display.max_columns", None)
 
-# Display number to 2 dp
-pandas.set_option("precision", 2)
+# *** Pre Printing / Export ***
+# Format currency values so they have $'s
+
+# Ticket Details Formatting (Uses currency function)
+add_dollars = ["Ticket", "Snacks", "Surcharge", "Total", "Sub Total"]
+for item in add_dollars:
+    movie_frame[item] = movie_frame[item].apply(currency)
+
+# Write each frame to a seperate csv files
+movie_frame.to_csv("ticket_details.csv")
+summary_frame.to_csv("snack_summary.csv")
 
 print()
 print("**** Ticket / Snack Info ****")
