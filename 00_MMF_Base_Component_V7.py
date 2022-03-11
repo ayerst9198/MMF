@@ -103,6 +103,7 @@ def get_ticket_price():
 
     # get age (between 12 and 130)
     age = num_check("Age: ", int, "Please enter an integer")
+    print()
 
     # if the age given is below 12 or above 130, an error is printed which sends the user back to the input name.
     if age < 12 or age > 130:
@@ -137,7 +138,7 @@ def get_snack():
         ["popcorn", "p", "pop", "corn", "a"], 
         ["M&Ms", "m&m's", "mms", "mm", "m", "b"], 
         ["pita chips", "chips", "pc", "pita", "c"], 
-        ["water", "w", "h2O" "d"],
+        ["water", "w" "d"],
         ["orange juice", "oj", "o", "juice", "orange" "e"]
     ]
 
@@ -149,8 +150,8 @@ def get_snack():
     while desired_snack != "xxx":
 
         snack_row = []
-
         desired_snack = input("Snack: ").lower()
+        print()
 
         if desired_snack == "xxx":
             return snack_list
@@ -171,6 +172,7 @@ def get_snack():
 
         if snack_choice == "invalid choice":
             print("Please enter a valid snack")
+            print()
         
         # check amount is valid (less than 5)
         if amount >= 5:
@@ -189,13 +191,57 @@ def get_snack():
 def currency(x):
     return "${:.2f}".format(x)
 
+# function for instructions
+def instructions(options):
+    show_help = "invalid choice"
+
+    while show_help == "invalid choice":
+        show_help = input("Would you like to read the instructions? ")
+        show_help = string_checker(show_help, options)
+
+        if show_help == "Yes":
+            print()
+            print("***INSTRUCTIONS***")
+            print()
+            print()
+            print("Enter your name and age in order to order a ticket. Only those above the age of 12, and below 130 may order tickets")
+            print("If you don't wish to order anything, please enter 'xxx' when your name is asked")
+            print()
+            print("The available snacks are: ")
+            print("Popcorn (popcorn, p, pop, corn)")
+            print("M&Ms (M&Ms, mms, mm, m)")
+            print("Pita Chips (pita chips, pc, pita, chips)")
+            print("Water (water, w)")
+            print("Orange Juice (oj, o, juice, orange)")
+            print()
+            print("enter 'xxx' if you wish to stop ordering snacks")
+            print()
+            print("When asked wether to pay using cash or credit, enter ca or cash for cash, or cr or credit for credit (this will add some surcharge)")
+            print()
+            print("The summary will include the total ticket cost, snack cost, surcharge, and overall total cost.")
+            print()
+            print('Details will be exported in the form of an excel file that can be viewed at any time in the same folder as this program')
+            print()
+            print("Please enjoy using this program")
+            return ""
+        
+        elif show_help == "No":
+            return ""
+
+        elif show_help == "invalid choice":
+            print("Please enter y/n")
+            continue
+        
+        return ""
+
+
 # *********** Main Routine ***********
 
 # Set up Dictionaries / lists needed to hold data
 name = ""
 ticket_count = 0
 ticket_sales = 0
-MAX_TICKETS = 5
+MAX_TICKETS = 150
 
 # initialise lists
 pay_method = [
@@ -252,7 +298,8 @@ price_dict = {
 }
 
 # Ask user if they have used the program before & show instructions if they haven't
-
+instructions(yes_no)
+print()
 
 # initialise loop so that it runs at least once
 while name != "xxx" and ticket_count <= MAX_TICKETS - 1:
@@ -264,6 +311,7 @@ while name != "xxx" and ticket_count <= MAX_TICKETS - 1:
     # get details
 
     # Get name (can't be blank)
+    print()
     name = not_blank("What is your name? ", "Your name cannot be blank, please enter a new name.")
 
     print()
@@ -393,7 +441,7 @@ summary_frame.to_csv("snack_summary.csv")
 
 print()
 print("**** Ticket / Snack Info ****")
-print("Note: for full details, please see the excel file called...")
+print("Note: for full details, please see the excel files called 'snack_summary', and 'ticket_details'")
 print()
 print(movie_frame[["Ticket", "Sub Total", "Surcharge", "Total"]])
 print()
